@@ -10,12 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-<<<<<<< HEAD
     "preview": "vite preview",
     "start": "vite"
-=======
-    "preview": "vite preview"
->>>>>>> bdf2099a9a17a30b90e9a56611f8878115e4204d
   },
   "dependencies": {
     "bootstrap-icons": "^1.11.3",
