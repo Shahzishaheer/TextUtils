@@ -1,0 +1,95 @@
+in java script the datatype is dynamic, you can change one variable for  different datatype.
+the another datatype is boolen which store true and false .
+during conditional operation this data type is use.
+*typeof* show datatype of any variable without show there data.
+templete letral ${} which show variable data. but work in `${}`
+
+function.
+variable.trim();
+remove space from starting and ending point.
+variable.trimStart();
+remove space from starting.
+variable.trimEnd();
+remove space from end.
+variable.toUpperCase();
+variable.tolowerCase();
+.shift() use for remove variable from starting.
+.pop is use for remove element form end. 
+.unshift() use for add variable from starting.
+.push is use for add element form end.
+.splice() remove element form any position, parameter need starting point 
+and how much elements you want to remove.
+.split() function use for the variable's text letter
+save into each index of array
+.join() fonction convert array's element into one variable.
+.concat() function use for combine two arrays.
+
+imediately invoked function. without  
+
+
+object constructor :
+ how add property in last.through prototype lateron you can add property.
+
+
+
+       let p = document.getElementById("p1");
+
+        /* assignment attribute with value*/
+
+        p.setAttribute("name", "form1");
+
+        // check the value of any attribute 
+
+        let atti = p.getAttribute("id");
+        console.log(atti);
+        p.removeAttribute("name");
+
+        //inlinecss
+
+        p1.style.cssText += "width: 60px; border-radius: 9px; color: blue;";
+        let css = getComputedStyle(p1)
+        console.log(css);
+
+        let b = document.getElementById("box");
+        b.classList.add("color")
+        //b.classList.replace("color","dim");
+
+        function showAlert() {
+            p1.style.cssText += "color: green; font-size:15px; font-style:bold; background-color: red; margin:5px 15px; cursor :pointer; ";
+
+        }
+        // js function which the css through event happen
+        function sty() {
+            let b = document.getElementById("box");
+
+            b.innerHTML = "apply the java function";
+
+            box.style.cssText += "width: 70px; height: 3p5x; background-color: violet; transition: margin-right 2s ease-in-out; cursor: pointer; color: green; font-size:25px;";
+
+        }
+        function sty1() {
+            let b = document.getElementById("box");
+
+            b.innerHTML = "mouse over apply";
+
+            box.style.cssText += "width: 50px; height: 30px; background-color: lightblue; color: black; font-size:25px;";
+
+        }
+
+        function sty2() {
+            let contain = document.getElementById("contain");
+            contain.innerHTML = "second div";
+            contain.style.cssText="border 3px soild black; background-color: green; color: black; font-size: large; width:auto; height:auto;";
+
+        }
+
+        //chage the button css through event listner function
+        let btn = document.getElementById("p1");
+
+        btn.addEventListener('mouseover', showAlert);
+        btn.addEventListener('click', sty);
+        btn.addEventListener('mouseout', sty1);
+React
+const [text ,setText] =useState("Initialtext"); 
+text is initial value , setText function change the text value.
+React router

@@ -1,0 +1,42 @@
+/* .navbar navbar-expand-lg bg-body-tertiary{
+  position: relative;
+  top: -8px;
+  width: 10px;
+} */
+.navbar-brand:hover{
+  cursor: pointer;
+  font-weight: bold;
+
+}
+/* .container-fluid{
+  background-color: rgb(82, 149, 226);
+  
+} */
+.navbar-nav .nav-link.active{
+  font-weight:bold;
+  color: rgba(206, 11, 164, 0.603);
+  
+}
+.navbar-nav .nav-link.active:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  /* font-size: x-large; */
+  
+  color:violet
+}
+
+.nav-item .nav-link{
+  font-weight:bold;
+  color: rgba(206, 11, 164, 0.603);
+}
+.nav-item .nav-link:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  /* font-size: x-large; */
+  color:violet
+}
+.d-flex .form-control:hover{
+cursor: pointer;
+/* border-color: rgb(129, 46, 122); */
+/* border: 3px solid rgb(129, 46, 122); */
+}
