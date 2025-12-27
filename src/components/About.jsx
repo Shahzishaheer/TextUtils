@@ -1,142 +1,76 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function About( props) {
-  // let myStyle =
-  //     color: 'white',
-  //     backgroundColor: 'black'
-  // }
-
-  const [myStyle, setmyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-  });
-  const [myBtn, setmyBtn] = useState("Enable Dark Mode");
-
-  const ChangeMode = () => {
-    if (myStyle.color === "black") {
-      setmyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setmyBtn("Enabled Dark Mode");
-    } else {
-      setmyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-      setmyBtn("Enabled Light Mode");
-    }
-  };
+const AccordionItem = ({ title, content, isOpen, onClick }) => {
   return (
-    <>
-      <div className="container " style={myStyle}>
-        <h1 className="my-3">About Us</h1>
-        <div className="accordion" id="accordionExample">
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button"
-                style={myStyle}
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseOne"
-                aria-expanded="true"
-                aria-controls="collapseOne"
-              >
-                Accordion Item #1
-              </button>
-            </h2>
-            <div
-              id="collapseOne"
-              className="accordion-collapse collapse show"
-              data-bs-parent="#accordionExample"
-            >
-              <div className="accordion-body" style={myStyle}>
-                <strong>This is the first item's accordion body.</strong> It is
-                shown by default, until the collapse plugin adds the appropriate
-                classNamees that we use to style each element. These classNamees
-                control the overall appearance, as well as the showing and
-                hiding via CSS transitions. You can modify any of this with
-                custom CSS or overriding our default variables. It's also worth
-                noting that just about any HTML can go within the{" "}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button collapsed"
-                style={myStyle}
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTwo"
-                aria-expanded="false"
-                aria-controls="collapseTwo"
-              >
-                Accordion Item #2
-              </button>
-            </h2>
-            <div
-              id="collapseTwo"
-              className="accordion-collapse collapse"
-              data-bs-parent="#accordionExample"
-            >
-              <div className="accordion-body" style={myStyle}>
-                <strong>This is the second item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classNamees that we use to style each element. These
-                classNamees control the overall appearance, as well as the
-                showing and hiding via CSS transitions. You can modify any of
-                this with custom CSS or overriding our default variables. It's
-                also worth noting that just about any HTML can go within the{" "}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h2 className="accordion-header">
-              <button
-                className="accordion-button collapsed"
-                style={myStyle}
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseThree"
-                aria-expanded="false"
-                aria-controls="collapseThree"
-              >
-                Accordion Item #3
-              </button>
-            </h2>
-            <div
-              id="collapseThree"
-              className="accordion-collapse collapse"
-              data-bs-parent="#accordionExample"
-            >
-              <div className="accordion-body" style={myStyle}>
-                <strong>This is the third item's accordion body.</strong> It is
-                hidden by default, until the collapse plugin adds the
-                appropriate classNamees that we use to style each element. These
-                classNamees control the overall appearance, as well as the
-                showing and hiding via CSS transitions. You can modify any of
-                this with custom CSS or overriding our default variables. It's
-                also worth noting that just about any HTML can go within the{" "}
-                <code>.accordion-body</code>, though the transition does limit
-                overflow.
-              </div>
-            </div>
-          </div>
+    <div className="border-b border-gray-200 dark:border-slate-700">
+      <h2>
+        <button
+          type="button"
+          className={`flex items-center justify-between w-full p-5 font-medium rtl:text-right border-gray-200 dark:border-gray-700 gap-3 ${
+            isOpen ? "text-blue-600 bg-gray-100 dark:bg-slate-800 dark:text-white" : "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800"
+          }`}
+          onClick={onClick}
+        >
+          <span>{title}</span>
+          <svg
+            data-accordion-icon
+            className={`w-3 h-3 shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`}
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6"
+          >
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
+          </svg>
+        </button>
+      </h2>
+      <div className={`${isOpen ? "block" : "hidden"} transition-all duration-300`}>
+        <div className="p-5 border border-t-0 border-gray-200 dark:border-slate-700 dark:bg-slate-900">
+          <p className="mb-2 text-gray-500 dark:text-gray-400">{content}</p>
         </div>
       </div>
-      <button
-        onClick={ChangeMode}
-        type="button"
-        className="btn btn-primary my-3"
-      >
-        {myBtn}{" "}
-      </button>
-    </>
+    </div>
+  );
+};
+
+AccordionItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export default function About() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleAccordionClick = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  return (
+    <div className="container mx-auto max-w-4xl py-8 px-4">
+      <h1 className="my-6 text-3xl font-bold text-gray-900 dark:text-white">About Us</h1>
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-slate-700">
+        <AccordionItem
+          title="Analyze Your Text"
+          content="TextUtils gives you a way to analyze your text quickly and efficiently. Be it word count, character count, or reading time estimation."
+          isOpen={activeIndex === 0}
+          onClick={() => handleAccordionClick(0)}
+        />
+        <AccordionItem
+          title="Free to use"
+          content="TextUtils is a free character counter tool that provides instant character count & word count statistics for a given text. TextUtils reports the number of words and characters. Thus it is suitable for writing text with word/ character limit."
+          isOpen={activeIndex === 1}
+          onClick={() => handleAccordionClick(1)}
+        />
+        <AccordionItem
+          title="Browser Compatible"
+          content="This word counter software works in any web browsers such as Chrome, Firefox, Internet Explorer, Safari, Opera. It suits to count characters in facebook, blog, books, excel document, pdf document, essays, etc."
+          isOpen={activeIndex === 2}
+          onClick={() => handleAccordionClick(2)}
+        />
+      </div>
+    </div>
   );
 }

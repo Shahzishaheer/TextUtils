@@ -1,86 +1,68 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import Textform from "./components/Textform";
 import Alert from "./components/Alert";
-import "../src/style.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [alert, setalert] = useState(null);
+  const [alert, setAlert] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
 
-  function Showalert(message, type) {
-    setalert({
+  // Initialize theme from system preference or local storage if needed
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const showAlert = (message, type) => {
+    setAlert({
       msg: message,
-      Type: type,
+      type: type, // Fixed naming convention from 'Type' to 'type'
     });
     setTimeout(() => {
-      setalert(null);
-    }, 1500);
-  }
-
-  const [mode, setmode] = useState("light");
-  const Changemode = () => {
-    // console.log('fds')
-    if (mode === "light") {
-      setmode("dark");
-      document.body.style.backgroundColor = "#2e416c";
-      Showalert("dark mode Enable", "success");
-    } else {
-      setmode("light");
-      document.body.style.backgroundColor = "white";
-      Showalert("light mode Enable", "success");
-    }
-    // setmode(mode=="light"?"dark":"light")
-    //   document.body.style.backgroundColor= mode=="light"?"#2e416c":"white";
+      setAlert(null);
+    }, 2000);
   };
-  const [Mode, setMode] = useState("light");
 
-  const changeMode = () => {
-    if (Mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#20c997";
-      document.title = "TextUtils-dark";
-    } else {
-      setMode("light");
-      document.body.style.backgroundColor = "white";
-      document.title = "TextUtils-light";
-    }
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    showAlert(darkMode ? "Light mode enabled" : "Dark mode enabled", "success");
   };
+
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="min-h-screen transition-colors duration-300 bg-gray-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100">
         <Navbar
-          title=" TextUlis"
+          title="TextUtils"
           home="Home"
-          about="About Us"
-          bg={mode}
-          modeChanger={Changemode}
-          Mode={Mode}
-          Changed={changeMode}
+          about="About"
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
         />
-        <Alert alert={alert} />
-        <Routes>
-          <Route exact path="/about" element={<About />}></Route>
-          <Route
-            exact
-            path="/"
-            element={
-              <div className="container my-3">
+        <div className="pt-20 container mx-auto px-4">
+           {/* pt-20 to account for fixed navbar if we decide to fix it, or just spacing */}
+          <Alert alert={alert} />
+          <Routes>
+            <Route exact path="/about" element={<About />} />
+            <Route
+              exact
+              path="/"
+              element={
                 <Textform
-                  heading="Text Analysis"
-                  bg={mode}
-                  modeChanger={Changemode}
-                  show={Showalert}
-                  Mode={Mode}
-                  Changed={changeMode}
+                  heading="Text Analysis & Converter"
+                  showAlert={showAlert}
                 />
-              </div>
-            }
-          ></Route>
-        </Routes>
-      </Router>
-    </>
+              }
+            />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
+
 export default App;
