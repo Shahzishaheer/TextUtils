@@ -26,6 +26,7 @@ TextUlis is a powerful and versatile text utility application built with React a
 - **Routing:** React Router DOM
   
   # Visual Dispaly
+  ![alt text](image.png)
 
 ## 📥 Installation
 
